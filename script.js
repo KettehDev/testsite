@@ -3,22 +3,20 @@
 
   var DISCORD_ID = "1484976113255190733";
 
-  /* clock removed — no longer in HTML */
-
   /* ============ SCROLL REVEAL ============ */
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
       if(entry.isIntersecting){
         entry.target.style.opacity = '1';
-        entry.target.style.transform = entry.target.dataset.rot || 'none';
+        entry.target.style.transform = 'none';
         io.unobserve(entry.target);
       }
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.work-row, .about-text p, .contact-item, .stack-box, .sticky-note, .polaroid').forEach(function(el, i){
+  document.querySelectorAll('.work-item, .contact-card, .meta-row, .about-text p, .hero-pill, .hero-heading, .hero-sub, .hero-actions, .live-card').forEach(function(el, i){
     el.style.opacity = '0';
-    el.style.transform = 'translateY(14px)';
+    el.style.transform = 'translateY(12px)';
     el.style.transition = 'opacity .7s cubic-bezier(.2,.9,.3,1) ' + (i * 0.03) + 's, transform .7s cubic-bezier(.2,.9,.3,1) ' + (i * 0.03) + 's';
     io.observe(el);
   });
@@ -68,7 +66,7 @@
     var content = document.getElementById('dcContent');
     if(!content) return;
     if(!data){
-      content.innerHTML = '<div class="dc-error">could not reach discord api</div>';
+      content.innerHTML = '<div class="dc-error">could not reach discord</div>';
       return;
     }
 
@@ -130,7 +128,7 @@
         imgUrl = activityAssetUrl(mainActivity.application_id, mainActivity.assets.large_image);
       }
       if(imgUrl){
-        html += '<img class="dc-act-img" src="' + imgUrl + '" alt="" onerror="this.style.background=\'#ece5d0\';this.removeAttribute(\'src\')">';
+        html += '<img class="dc-act-img" src="' + imgUrl + '" alt="" onerror="this.style.background=\'#f4f4f5\';this.removeAttribute(\'src\')">';
       } else {
         html += '<div class="dc-act-img"></div>';
       }
@@ -209,7 +207,7 @@
       }
     }, { once: true });
 
-    setTimeout(function(){ btn.classList.add('show'); }, 700);
+    setTimeout(function(){ btn.classList.add('show'); }, 800);
 
     btn.addEventListener('click', function(){
       if(audio.paused){
