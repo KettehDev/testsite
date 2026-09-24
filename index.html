@@ -4,328 +4,277 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ketteh</title>
-<meta name="description" content="ketteh - js, c++, c#, skript. bots and minecraft tooling.">
+<meta name="description" content="ketteh — js, c++, c#, skript. bots and minecraft tooling.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="paper-grain"></div>
-
 <main>
 
-  <!-- TOP -->
-  <header class="top">
-    <div class="signature-mark">
-      <span class="sig-name">ketteh</span>
-      <svg class="sig-underline" viewBox="0 0 200 12" preserveAspectRatio="none">
-        <path d="M2 8 Q 40 2, 80 6 T 160 5 T 198 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-      </svg>
-    </div>
-    <nav class="top-nav">
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="/" class="nav-brand">ketteh</a>
+    <div class="nav-links">
       <a href="#work">work</a>
       <a href="#about">about</a>
-      <a href="#contact">say hi</a>
-      <a href="https://github.com/KettehDev" target="_blank" rel="noopener" class="nav-ext">github ↗</a>
-    </nav>
-  </header>
+      <a href="#contact">contact</a>
+    </div>
+    <a href="https://github.com/KettehDev" target="_blank" rel="noopener" class="nav-cta">
+      github
+      <svg viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </nav>
 
   <!-- HERO -->
   <section class="hero">
-
-    <div class="hero-text">
-      <div class="hero-note">
-        <span class="dot-live"></span>
-        <span>open for work · 2 slots · usually replies fast</span>
-      </div>
-
-      <h1 class="hero-h1">
-        yo, i'm <span class="hero-name">ketteh</span>
-      </h1>
-
-      <p class="hero-copy">
-        I build bots &amp; minecraft tooling. Been writing code since I was 13. 
-        JavaScript, C++, C#, Skript. Mostly solo. Mostly at 2am.
-      </p>
-
-      <div class="hero-links">
-        <a href="#work" class="link-arrow">
-          see what i've made
-          <svg class="inline-arrow" viewBox="0 0 30 16"><path d="M1 8 L24 8 M18 2 L24 8 L18 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a href="https://github.com/KettehDev" target="_blank" rel="noopener" class="link-arrow ghost">
-          github
-          <svg class="inline-arrow" viewBox="0 0 30 16"><path d="M1 15 L26 1 M18 1 L26 1 L26 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-
-      <div class="hero-scrawl">
-        <svg viewBox="0 0 260 60" class="scrawl-svg">
-          <path d="M6 40 Q 60 8, 120 30 T 250 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          <path d="M244 12 L252 18 L246 26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span class="scrawl-text">that's me btw</span>
-      </div>
+    <div class="hero-pill">
+      <span class="pill-dot"></span>
+      open for work — 2 slots
     </div>
 
-    <div class="hero-side">
-      <div class="polaroid">
-        <div class="polaroid-inner">
-          <div class="polaroid-img">
-            <span class="polaroid-letter">K</span>
-          </div>
-          <div class="polaroid-caption">still debugging, still caffeinated</div>
-        </div>
-      </div>
+    <h1 class="hero-heading">
+      hey, i'm ketteh<span class="dot">.</span>
+    </h1>
 
-      <!-- Discord live card -->
-      <div class="discord-note" id="discordCard">
-        <div class="dn-tab">
-          <span class="dn-tab-dot"></span>
-          <span>discord · live</span>
-        </div>
-        <div class="dn-body" id="dcContent">
-          <div class="dn-loading">connecting...</div>
-        </div>
-        <div class="dn-bio">
-          <a href="https://nohello.net" target="_blank" rel="noopener" class="dn-bio-link">
-            <span class="dn-bio-icon">↗</span>
-            <span>read nohello.net before dming</span>
-          </a>
-          <div class="dn-bio-warn">
-            <span class="dn-bio-icon warn">✗</span>
-            <span>don't dm me for dev issues</span>
-          </div>
-          <a href="https://discord.gg/qFXsGMWWZ" target="_blank" rel="noopener" class="dn-bio-cta">
-            <span class="dn-cta-dot"></span>
-            <span>join my discord</span>
-            <span class="dn-cta-hint">for anything else</span>
-          </a>
-        </div>
-      </div>
+    <p class="hero-sub">
+      I build bots and minecraft tooling. Been writing code since I was 13.
+      JavaScript, C++, C#, Skript.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#work" class="btn btn-primary">
+        view work
+        <svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="https://github.com/KettehDev" target="_blank" rel="noopener" class="btn btn-ghost">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        github
+      </a>
     </div>
-
   </section>
 
-  <!-- TICKER -->
-  <div class="tape">
-    <div class="tape-track">
-      <span>bot development</span><span class="tape-star">✦</span>
-      <span>minecraft tooling</span><span class="tape-star">✦</span>
-      <span>javascript</span><span class="tape-star">✦</span>
-      <span>c++</span><span class="tape-star">✦</span>
-      <span>c#</span><span class="tape-star">✦</span>
-      <span>skript</span><span class="tape-star">✦</span>
-      <span>bot development</span><span class="tape-star">✦</span>
-      <span>minecraft tooling</span><span class="tape-star">✦</span>
-      <span>javascript</span><span class="tape-star">✦</span>
-      <span>c++</span><span class="tape-star">✦</span>
-      <span>c#</span><span class="tape-star">✦</span>
-      <span>skript</span><span class="tape-star">✦</span>
+  <!-- DISCORD CARD (left-aligned, generous) -->
+  <section class="live-section">
+    <div class="live-card" id="discordCard">
+      <div class="live-head">
+        <span class="live-dot"></span>
+        <span class="live-label">live from discord</span>
+      </div>
+      <div class="live-body" id="dcContent">
+        <div class="live-skeleton">
+          <div class="skel-avatar"></div>
+          <div class="skel-lines">
+            <div class="skel-line w60"></div>
+            <div class="skel-line w40"></div>
+          </div>
+        </div>
+      </div>
+      <div class="live-bio">
+        <a href="https://nohello.net" target="_blank" rel="noopener" class="live-bio-link">
+          <span class="bio-icon">↗</span> read nohello.net before dming
+        </a>
+        <div class="live-bio-warn">
+          <span class="bio-icon">✕</span> don't dm for dev issues
+        </div>
+        <a href="https://discord.gg/qFXsGMWWZ" target="_blank" rel="noopener" class="live-bio-cta">
+          <span class="bio-cta-dot"></span>
+          join my discord
+          <span class="bio-cta-hint">for anything else</span>
+        </a>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- WORK -->
-  <section class="work" id="work">
-    <h2 class="section-h2">
-      <span class="section-mark">01 /</span>
-      <span>stuff i've made</span>
-    </h2>
+  <section class="section" id="work">
+    <div class="section-head">
+      <div class="section-label">work</div>
+      <h2 class="section-title">what I've built</h2>
+    </div>
 
-    <div class="work-list">
+    <div class="work-grid">
 
-      <article class="work-row">
-        <div class="wr-num">01</div>
-        <div class="wr-body">
-          <h3 class="wr-title">Discord bot suite</h3>
-          <p class="wr-desc">Moderation, tickets, auto-roles, logging. Runs on sharded Node with a small control panel for the owner.</p>
-          <div class="wr-tags">
-            <span>node.js</span>
-            <span>discord.js</span>
-          </div>
+      <article class="work-item">
+        <div class="wi-top">
+          <span class="wi-index">01</span>
+          <span class="wi-year">2025</span>
         </div>
-        <div class="wr-year">'25</div>
+        <h3 class="wi-title">Discord bot suite</h3>
+        <p class="wi-desc">Moderation, tickets, auto-roles, logging. Runs on sharded Node with a small control panel for the owner.</p>
+        <div class="wi-tags">
+          <span>node.js</span><span>discord.js</span>
+        </div>
       </article>
 
-      <article class="work-row">
-        <div class="wr-num">02</div>
-        <div class="wr-body">
-          <h3 class="wr-title">Skript gen pack</h3>
-          <p class="wr-desc">Full gen tycoon system - auto-collect, prestige tiers, custom drill abilities. Built for a live server and running 24/7.</p>
-          <div class="wr-tags">
-            <span>skript</span>
-            <span>skbee</span>
-          </div>
+      <article class="work-item">
+        <div class="wi-top">
+          <span class="wi-index">02</span>
+          <span class="wi-year">2025</span>
         </div>
-        <div class="wr-year">'25</div>
+        <h3 class="wi-title">Skript gen pack</h3>
+        <p class="wi-desc">Full gen tycoon system — auto-collect, prestige tiers, custom drill abilities. Built for a live server running 24/7.</p>
+        <div class="wi-tags">
+          <span>skript</span><span>skbee</span>
+        </div>
       </article>
 
-      <article class="work-row">
-        <div class="wr-num">03</div>
-        <div class="wr-body">
-          <h3 class="wr-title">Automation kit</h3>
-          <p class="wr-desc">CLI tools for repetitive tasks. Config-driven, no bloat, works on Windows and Linux without weird dependencies.</p>
-          <div class="wr-tags">
-            <span>node.js</span>
-            <span>cli</span>
-          </div>
+      <article class="work-item">
+        <div class="wi-top">
+          <span class="wi-index">03</span>
+          <span class="wi-year">2024</span>
         </div>
-        <div class="wr-year">'24</div>
+        <h3 class="wi-title">Automation kit</h3>
+        <p class="wi-desc">CLI tools for repetitive tasks. Config-driven, no bloat, works on Windows and Linux without weird dependencies.</p>
+        <div class="wi-tags">
+          <span>node.js</span><span>cli</span>
+        </div>
       </article>
 
-      <article class="work-row">
-        <div class="wr-num">04</div>
-        <div class="wr-body">
-          <h3 class="wr-title">Sentinel</h3>
-          <p class="wr-desc">Open-source security checks for Minecraft servers. Reports suspicious configs, bad permissions, and known exploits.</p>
-          <div class="wr-tags">
-            <span>c#</span>
-            <span>open source</span>
-          </div>
+      <article class="work-item">
+        <div class="wi-top">
+          <span class="wi-index">04</span>
+          <span class="wi-year">2024</span>
         </div>
-        <div class="wr-year">'24</div>
+        <h3 class="wi-title">Sentinel</h3>
+        <p class="wi-desc">Open-source security checks for Minecraft servers. Reports suspicious configs, bad permissions, known exploits.</p>
+        <div class="wi-tags">
+          <span>c#</span><span>open source</span>
+        </div>
       </article>
 
-      <article class="work-row">
-        <div class="wr-num">05</div>
-        <div class="wr-body">
-          <h3 class="wr-title">Web experiments</h3>
-          <p class="wr-desc">Small canvas toys, animation tests, interaction ideas. Nothing useful, everything fun.</p>
-          <div class="wr-tags">
-            <span>css</span>
-            <span>js</span>
-          </div>
+      <article class="work-item">
+        <div class="wi-top">
+          <span class="wi-index">05</span>
+          <span class="wi-year">2023</span>
         </div>
-        <div class="wr-year">'23</div>
+        <h3 class="wi-title">Web experiments</h3>
+        <p class="wi-desc">Small canvas toys, animation tests, interaction ideas. Nothing useful, everything fun.</p>
+        <div class="wi-tags">
+          <span>css</span><span>js</span>
+        </div>
       </article>
 
-      <article class="work-row">
-        <div class="wr-num">06</div>
-        <div class="wr-body">
-          <h3 class="wr-title">Native tools</h3>
-          <p class="wr-desc">Low-level utilities for Windows. Small binaries, fast startup, zero dependencies.</p>
-          <div class="wr-tags">
-            <span>c++</span>
-            <span>systems</span>
-          </div>
+      <article class="work-item">
+        <div class="wi-top">
+          <span class="wi-index">06</span>
+          <span class="wi-year">2023</span>
         </div>
-        <div class="wr-year">'23</div>
+        <h3 class="wi-title">Native tools</h3>
+        <p class="wi-desc">Low-level utilities for Windows. Small binaries, fast startup, zero dependencies.</p>
+        <div class="wi-tags">
+          <span>c++</span><span>systems</span>
+        </div>
       </article>
 
     </div>
   </section>
 
   <!-- ABOUT -->
-  <section class="about" id="about">
-    <h2 class="section-h2">
-      <span class="section-mark">02 /</span>
-      <span>about</span>
-    </h2>
+  <section class="section" id="about">
+    <div class="section-head">
+      <div class="section-label">about</div>
+      <h2 class="section-title">a bit about me</h2>
+    </div>
 
-    <div class="about-body">
+    <div class="about">
       <div class="about-text">
-        <p class="about-lede">
-          I work solo. Small scope, big polish. If it's not done it doesn't go live - 
+        <p>
+          I work solo. Small scope, big polish. If it's not done it doesn't go live,
           and if it goes live, it works.
         </p>
         <p>
-          Most of what I build is bot development and Minecraft tooling. Skript for 
-          the fast stuff, Java or C# when it needs to be real.
-        </p>
-        <p>
-          When I'm not coding I'm probably still coding, just with music on and 
-          worse posture.
+          Most of what I build is bot development and Minecraft tooling. Skript for
+          the fast stuff, Java or C# when it needs to be real. I care more about
+          things working than looking clever.
         </p>
       </div>
 
-      <div class="about-side">
-        <div class="stack-box">
-          <div class="stack-title">what i use</div>
-          <div class="stack-rows">
-            <div class="stack-row"><span class="stack-k">langs</span><span class="stack-v">JS · C++ · C# · Skript</span></div>
-            <div class="stack-row"><span class="stack-k">web</span><span class="stack-v">CSS · HTML</span></div>
-            <div class="stack-row"><span class="stack-k">focus</span><span class="stack-v">bots · minecraft</span></div>
-            <div class="stack-row"><span class="stack-k">github</span><span class="stack-v"><a href="https://github.com/KettehDev" target="_blank" rel="noopener">@KettehDev ↗</a></span></div>
-          </div>
+      <div class="about-meta">
+        <div class="meta-row">
+          <span class="meta-k">languages</span>
+          <span class="meta-v">JavaScript, C++, C#, Skript</span>
         </div>
-
-        <div class="sticky-note">
-          <svg class="tape-strip" viewBox="0 0 100 20" preserveAspectRatio="none">
-            <rect x="0" y="5" width="100" height="10" fill="rgba(220, 200, 130, 0.55)"/>
-          </svg>
-          <div class="sticky-note-text">
-            currently building<br>
-            <span>bots &amp; tools</span>
-          </div>
+        <div class="meta-row">
+          <span class="meta-k">web</span>
+          <span class="meta-v">CSS, HTML</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-k">focus</span>
+          <span class="meta-v">bots, minecraft tooling</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-k">github</span>
+          <span class="meta-v"><a href="https://github.com/KettehDev" target="_blank" rel="noopener">@KettehDev</a></span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <h2 class="section-h2">
-      <span class="section-mark">03 /</span>
-      <span>say hi</span>
-    </h2>
+  <section class="section" id="contact">
+    <div class="section-head">
+      <div class="section-label">contact</div>
+      <h2 class="section-title">get in touch</h2>
+    </div>
 
-    <div class="contact-list">
-
-      <a href="mailto:hey@ketteh.dev" class="contact-item">
-        <div class="ci-left">
-          <span class="ci-label">email</span>
-          <span class="ci-value">hey@ketteh.dev</span>
+    <div class="contact-grid">
+      <a href="mailto:hey@ketteh.dev" class="contact-card">
+        <div class="cc-label">email</div>
+        <div class="cc-value">hey@ketteh.dev</div>
+        <div class="cc-arrow">
+          <svg viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <span class="ci-arrow">↗</span>
       </a>
 
-      <a href="https://github.com/KettehDev" target="_blank" rel="noopener" class="contact-item">
-        <div class="ci-left">
-          <span class="ci-label">github</span>
-          <span class="ci-value">@KettehDev</span>
+      <a href="https://github.com/KettehDev" target="_blank" rel="noopener" class="contact-card">
+        <div class="cc-label">github</div>
+        <div class="cc-value">@KettehDev</div>
+        <div class="cc-arrow">
+          <svg viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <span class="ci-arrow">↗</span>
       </a>
 
-      <a href="https://discord.gg/qFXsGMWWZ" target="_blank" rel="noopener" class="contact-item">
-        <div class="ci-left">
-          <span class="ci-label">discord</span>
-          <span class="ci-value">join my server</span>
+      <a href="https://discord.gg/qFXsGMWWZ" target="_blank" rel="noopener" class="contact-card">
+        <div class="cc-label">discord</div>
+        <div class="cc-value">join my server</div>
+        <div class="cc-arrow">
+          <svg viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <span class="ci-arrow">↗</span>
       </a>
 
-      <a href="https://nohello.net" target="_blank" rel="noopener" class="contact-item">
-        <div class="ci-left">
-          <span class="ci-label">before dming</span>
-          <span class="ci-value">read nohello.net first</span>
+      <a href="https://nohello.net" target="_blank" rel="noopener" class="contact-card">
+        <div class="cc-label">before dming</div>
+        <div class="cc-value">read this first</div>
+        <div class="cc-arrow">
+          <svg viewBox="0 0 12 12" fill="none"><path d="M3 9L9 3M9 3H4M9 3V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <span class="ci-arrow">↗</span>
       </a>
-
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer class="footer">
-    <span>ketteh © 2026</span>
-    <span>made with too much coffee</span>
-    <span>no cookies, no bs</span>
+    <div class="footer-left">
+      <span class="footer-brand">ketteh</span>
+      <span class="footer-year">© 2026</span>
+    </div>
+    <div class="footer-right">
+      made with too much coffee
+    </div>
   </footer>
 
 </main>
 
-<!-- MUSIC TAB -->
-<button class="music-tab" id="musicBtn" aria-label="Play music">
-  <span class="mt-label">music</span>
-  <span class="mt-icon">
-    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
-      <path d="M8 5v14l11-7z"/>
-    </svg>
-  </span>
-  <span class="mt-eq">
+<!-- MUSIC -->
+<button class="music" id="musicBtn" aria-label="Toggle music">
+  <span class="music-wave">
     <span></span><span></span><span></span><span></span>
+  </span>
+  <span class="music-icon">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
   </span>
 </button>
 
