@@ -3,99 +3,22 @@
 
   var DISCORD_ID = "1484976113255190733";
 
-  /* ============ CLOCK ============ */
-  var clock = document.getElementById('clock');
-  function tick(){
-    var d = new Date();
-    var h = String(d.getHours()).padStart(2,'0');
-    var m = String(d.getMinutes()).padStart(2,'0');
-    var s = String(d.getSeconds()).padStart(2,'0');
-    if(clock) clock.textContent = h + ':' + m + ':' + s;
-  }
-  tick(); setInterval(tick, 1000);
-
-  /* ============ BACKGROUND CANVAS ============ */
-  var canvas = document.getElementById('bg-canvas');
-  if(canvas){
-    var ctx = canvas.getContext('2d');
-    var W, H;
-    var points = [];
-    var spacing = 60;
-
-    function resize(){
-      W = canvas.width = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-      points = [];
-      var cols = Math.ceil(W / spacing) + 1;
-      var rows = Math.ceil(H / spacing) + 1;
-      for(var i = 0; i < cols; i++){
-        for(var j = 0; j < rows; j++){
-          points.push({
-            x: i * spacing,
-            y: j * spacing,
-            baseX: i * spacing,
-            baseY: j * spacing
-          });
-        }
-      }
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    var mx = -1000, my = -1000;
-    document.addEventListener('mousemove', function(e){
-      mx = e.clientX; my = e.clientY;
-    });
-    document.addEventListener('mouseleave', function(){
-      mx = -1000; my = -1000;
-    });
-
-    function draw(){
-      ctx.clearRect(0, 0, W, H);
-
-      for(var i = 0; i < points.length; i++){
-        var p = points[i];
-        var dx = mx - p.baseX;
-        var dy = my - p.baseY;
-        var dist = Math.sqrt(dx*dx + dy*dy);
-        var force = Math.max(0, 1 - dist / 200);
-
-        // push away from mouse
-        var targetX = p.baseX - (dx / (dist + 1)) * force * 22;
-        var targetY = p.baseY - (dy / (dist + 1)) * force * 22;
-
-        p.x += (targetX - p.x) * 0.12;
-        p.y += (targetY - p.y) * 0.12;
-
-        var size = force > 0.1 ? 1.6 : 1;
-        var opacity = 0.08 + force * 0.6;
-
-        if(force > 0.05){
-          ctx.fillStyle = 'rgba(0, 255, 157, ' + opacity + ')';
-        } else {
-          ctx.fillStyle = 'rgba(139, 147, 161, ' + opacity + ')';
-        }
-        ctx.fillRect(p.x - size/2, p.y - size/2, size, size);
-      }
-      requestAnimationFrame(draw);
-    }
-    draw();
-  }
+  /* clock removed — no longer in HTML */
 
   /* ============ SCROLL REVEAL ============ */
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
       if(entry.isIntersecting){
         entry.target.style.opacity = '1';
-        entry.target.style.transform = 'none';
+        entry.target.style.transform = entry.target.dataset.rot || 'none';
         io.unobserve(entry.target);
       }
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.work-card, .contact-link, .stack-block, .about-text p, .hero-eyebrow, .hero-title, .hero-lede, .hero-actions, .discord-live').forEach(function(el, i){
+  document.querySelectorAll('.work-row, .about-text p, .contact-item, .stack-box, .sticky-note, .polaroid').forEach(function(el, i){
     el.style.opacity = '0';
-    el.style.transform = 'translateY(16px)';
+    el.style.transform = 'translateY(14px)';
     el.style.transition = 'opacity .7s cubic-bezier(.2,.9,.3,1) ' + (i * 0.03) + 's, transform .7s cubic-bezier(.2,.9,.3,1) ' + (i * 0.03) + 's';
     io.observe(el);
   });
@@ -109,13 +32,7 @@
     4: 'custom',
     5: 'competing in'
   };
-
-  var statusMap = {
-    online: 'online',
-    idle: 'idle',
-    dnd: 'dnd',
-    offline: 'offline'
-  };
+  var statusMap = { online: 'online', idle: 'idle', dnd: 'dnd', offline: 'offline' };
 
   function discordAvatarUrl(user){
     if(!user) return '';
@@ -150,7 +67,6 @@
   function renderDiscord(data){
     var content = document.getElementById('dcContent');
     if(!content) return;
-
     if(!data){
       content.innerHTML = '<div class="dc-error">could not reach discord api</div>';
       return;
@@ -164,21 +80,15 @@
 
     for(var i = 0; i < activities.length; i++){
       var a = activities[i];
-      if(a.type === 4){
-        customStatus = a;
-      } else if(!mainActivity && a.type !== 4){
-        mainActivity = a;
-      }
+      if(a.type === 4){ customStatus = a; }
+      else if(!mainActivity && a.type !== 4){ mainActivity = a; }
     }
 
     if(!mainActivity && data.listening_to_spotify && data.spotify){
       mainActivity = {
-        type: 2,
-        name: 'Spotify',
-        details: data.spotify.song,
-        state: data.spotify.artist,
-        _isSpotify: true,
-        _spotify: data.spotify
+        type: 2, name: 'Spotify',
+        details: data.spotify.song, state: data.spotify.artist,
+        _isSpotify: true, _spotify: data.spotify
       };
     }
 
@@ -188,7 +98,6 @@
     var nitroBadge = user.avatar && user.avatar.startsWith('a_') ? '<span class="dc-nitro">nitro</span>' : '';
 
     var html = '';
-
     html += '<div class="dc-user">';
     html += '  <div class="dc-avatar-wrap">';
     html += '    <img class="dc-avatar" src="' + avUrl + '" alt="" onerror="this.style.display=\'none\'">';
@@ -214,7 +123,6 @@
     if(mainActivity){
       var typeLabel = activityTypeLabel[mainActivity.type] || 'activity';
       html += '<div class="dc-activity">';
-
       var imgUrl = '';
       if(mainActivity._isSpotify){
         imgUrl = mainActivity._spotify.album_art_url || '';
@@ -222,16 +130,14 @@
         imgUrl = activityAssetUrl(mainActivity.application_id, mainActivity.assets.large_image);
       }
       if(imgUrl){
-        html += '  <img class="dc-act-img" src="' + imgUrl + '" alt="" onerror="this.style.background=\'#14171d\';this.removeAttribute(\'src\')">';
+        html += '<img class="dc-act-img" src="' + imgUrl + '" alt="" onerror="this.style.background=\'#ece5d0\';this.removeAttribute(\'src\')">';
       } else {
-        html += '  <div class="dc-act-img"></div>';
+        html += '<div class="dc-act-img"></div>';
       }
-
-      html += '  <div class="dc-act-info">';
-      html += '    <div class="dc-act-label">' + typeLabel + '</div>';
-      html += '    <div class="dc-act-name">' + escapeHtml(mainActivity.name || '') + '</div>';
+      html += '<div class="dc-act-info">';
+      html += '<div class="dc-act-label">' + typeLabel + '</div>';
+      html += '<div class="dc-act-name">' + escapeHtml(mainActivity.name || '') + '</div>';
       if(mainActivity.details) html += '<div class="dc-act-detail">' + escapeHtml(mainActivity.details) + '</div>';
-
       if(mainActivity._isSpotify){
         var sp = mainActivity._spotify;
         var now = sp.timestamps ? Date.now() : 0;
@@ -246,11 +152,9 @@
         var elapsed2 = Date.now() - mainActivity.timestamps.start;
         html += '<div class="dc-act-time">' + fmtTime(elapsed2) + ' elapsed</div>';
       }
-
-      html += '  </div>';
-      html += '</div>';
+      html += '</div></div>';
     } else {
-      html += '<div class="dc-idle">// no activity right now</div>';
+      html += '<div class="dc-idle">no activity right now</div>';
     }
 
     content.innerHTML = html;
@@ -259,9 +163,7 @@
       fill.style.width = fill.getAttribute('data-pct') + '%';
     });
 
-    if(mainActivity && mainActivity._isSpotify){
-      startSpotifyTick();
-    }
+    if(mainActivity && mainActivity._isSpotify){ startSpotifyTick(); }
   }
 
   var spotifyInterval = null;
@@ -270,7 +172,7 @@
     spotifyInterval = setInterval(function(){
       var fill = document.querySelector('.dc-spotify-fill');
       var timeEl = document.querySelector('[data-cur]');
-      if(!fill) { clearInterval(spotifyInterval); return; }
+      if(!fill){ clearInterval(spotifyInterval); return; }
       var start = parseInt(fill.getAttribute('data-start'), 10);
       var end = parseInt(fill.getAttribute('data-end'), 10);
       var total = end - start;
@@ -285,17 +187,10 @@
     fetch('https://api.lanyard.rest/v1/users/' + DISCORD_ID, { cache: 'no-store' })
       .then(function(r){ return r.json(); })
       .then(function(json){
-        if(json && json.success && json.data){
-          renderDiscord(json.data);
-        } else {
-          renderDiscord(null);
-        }
+        renderDiscord(json && json.success && json.data ? json.data : null);
       })
-      .catch(function(){
-        renderDiscord(null);
-      });
+      .catch(function(){ renderDiscord(null); });
   }
-
   fetchDiscord();
   setInterval(fetchDiscord, 15000);
 
@@ -318,11 +213,7 @@
 
     btn.addEventListener('click', function(){
       if(audio.paused){
-        audio.play().then(function(){
-          btn.classList.add('playing');
-        }).catch(function(err){
-          console.warn('play failed', err);
-        });
+        audio.play().then(function(){ btn.classList.add('playing'); }).catch(function(){});
       } else {
         audio.pause();
         btn.classList.remove('playing');
@@ -347,23 +238,5 @@
       if(e.code === 'Space'){ e.preventDefault(); btn.click(); }
     });
   })();
-
-  /* ============ KONAMI ============ */
-  var konami = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
-  var ki = 0;
-  document.addEventListener('keydown', function(e){
-    if(e.key === konami[ki]){
-      ki++;
-      if(ki === konami.length){
-        ki = 0;
-        document.body.style.transition = 'filter 1s';
-        document.body.style.filter = 'hue-rotate(180deg)';
-        setTimeout(function(){
-          document.body.style.filter = 'hue-rotate(360deg)';
-          setTimeout(function(){ document.body.style.filter = ''; }, 1000);
-        }, 100);
-      }
-    } else { ki = 0; }
-  });
 
 })();
