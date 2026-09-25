@@ -280,7 +280,6 @@ main{
   font-family:var(--font);
 }
 
-/* banner */
 .dc-banner{
   height:120px;
   background:
@@ -298,7 +297,6 @@ main{
   pointer-events:none;
 }
 
-/* avatar overlapping the banner, sits inside padded area */
 .dc-head{
   padding:0 22px;
   position:relative;
@@ -337,7 +335,6 @@ main{
 .dc-status.dnd{background:var(--red);}
 .dc-status.offline{background:var(--grey);}
 
-/* user info */
 .dc-user-info{
   padding:14px 22px 0;
 }
@@ -362,7 +359,7 @@ main{
   font-weight:400;
 }
 
-/* badges row */
+/* badges row — ENLARGED */
 .dc-badges{
   display:flex;
   gap:6px;
@@ -373,21 +370,22 @@ main{
   border-top:1px solid rgba(255,255,255,.06);
 }
 .dc-badge-svg{
-  width:22px;
-  height:22px;
+  width:36px;
+  height:36px;
   display:grid;
   place-items:center;
   color:#5865f2;
   flex-shrink:0;
   transition:transform .2s;
 }
-.dc-badge-svg:hover{transform:scale(1.1);}
+.dc-badge-svg:hover{transform:scale(1.08);}
 .dc-badge-svg svg{
+  width:100%;
+  height:100%;
   display:block;
-  filter:drop-shadow(0 0 6px rgba(88,101,242,.5));
+  filter:drop-shadow(0 0 10px rgba(88,101,242,.6));
 }
 
-/* custom status */
 .dc-custom-status{
   display:flex;
   align-items:center;
@@ -403,7 +401,6 @@ main{
 }
 .dc-custom-status img{width:16px;height:16px;flex-shrink:0;}
 
-/* bio */
 .dc-bio{
   padding:16px 22px 0;
   display:flex;
@@ -422,7 +419,6 @@ main{
 }
 .dc-bio-line a:hover{text-decoration:underline;}
 
-/* activity card */
 .dc-activity{
   margin:16px 22px 0;
   padding:14px 16px;
@@ -487,7 +483,6 @@ main{
 .dc-act-meta span:nth-child(2)::before{background:#f0b232;}
 .dc-act-meta span:nth-child(3)::before{background:#5865f2;}
 
-/* spotify bar */
 .dc-spotify-bar{
   margin-top:10px;
   height:3px;
@@ -510,7 +505,6 @@ main{
   margin-top:5px;
 }
 
-/* bottom bio section (links to nohello + join button) */
 .dc-bottom{
   margin-top:20px;
   padding:16px 22px 22px;
@@ -520,12 +514,12 @@ main{
   gap:14px;
 }
 
-/* the small verified pill */
+/* verified pill — ENLARGED badge, more padding */
 .dc-verified-pill{
   display:inline-flex;
   align-items:center;
-  gap:8px;
-  padding:5px 12px 5px 6px;
+  gap:10px;
+  padding:6px 14px 6px 8px;
   background:#1e1f22;
   border:1px solid #2b2d31;
   border-radius:100px;
@@ -534,22 +528,23 @@ main{
   font-family:var(--font);
 }
 .dc-vp-badge{
-  width:18px;
-  height:18px;
+  width:28px;
+  height:28px;
   display:grid;
   place-items:center;
   color:#5865f2;
   flex-shrink:0;
 }
 .dc-vp-badge svg{
+  width:100%;
+  height:100%;
   display:block;
-  filter:drop-shadow(0 0 6px rgba(88,101,242,.5));
+  filter:drop-shadow(0 0 8px rgba(88,101,242,.55));
 }
 .dc-vp-text{color:#f2f3f5;font-weight:600;font-size:11.5px;}
 .dc-vp-sep{color:#4e5058;}
 .dc-vp-sub{color:#949ba4;font-family:var(--mono);font-size:11px;}
 
-/* links row */
 .dc-links{
   display:flex;
   flex-direction:column;
@@ -576,7 +571,6 @@ main{
 }
 .dc-link.warn::before{content:'✕';color:#f23f43;}
 
-/* join discord button */
 .dc-join{
   display:inline-flex;
   align-items:center;
@@ -604,7 +598,6 @@ main{
   margin-left:4px;
 }
 
-/* error state */
 .dc-error{
   padding:60px 20px;
   text-align:center;
@@ -646,7 +639,6 @@ main{
   color:var(--text-3);
 }
 
-/* ---------- WORK LIST ---------- */
 .list{display:flex;flex-direction:column;}
 
 .row{
@@ -713,7 +705,6 @@ main{
   padding-top:6px;
 }
 
-/* ---------- ABOUT ---------- */
 .about{
   display:grid;
   grid-template-columns:1.2fr 1fr;
@@ -791,7 +782,6 @@ main{
   animation:pulse 2.4s infinite;
 }
 
-/* ---------- CONTACT ---------- */
 .big-link{
   display:flex;
   align-items:center;
@@ -876,7 +866,6 @@ main{
   color:var(--text);
 }
 
-/* ---------- FOOTER ---------- */
 .foot{
   display:flex;
   justify-content:space-between;
