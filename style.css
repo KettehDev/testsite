@@ -11,6 +11,7 @@
   --text-3: #5a5a70;
   --accent: #d6ff3d;
   --accent-2: #ff5a3c;
+  --code-blue: #5b6bff;
   --online: #3ee07f;
   --idle: #f0b232;
   --dnd: #ff4d5e;
@@ -101,12 +102,15 @@ main{
   height: 34px;
   display: grid;
   place-items: center;
-  background: var(--text);
-  color: var(--bg);
+  background: var(--bg-2);
+  border: 1px solid var(--border);
   border-radius: 10px;
-  font-weight: 900;
-  font-size: 16px;
-  letter-spacing: -0.03em;
+  transition: transform .25s cubic-bezier(.2,.9,.3,1), border-color .2s;
+}
+.mark-k svg{ display: block; }
+.mark:hover .mark-k{
+  transform: rotate(-6deg) scale(1.05);
+  border-color: rgba(91,107,255,0.5);
 }
 .mark-status{
   display: flex;
@@ -392,12 +396,12 @@ main{
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  opacity: 0.5;
+  background: linear-gradient(90deg, transparent, var(--code-blue), var(--accent), transparent);
+  opacity: 0.55;
 }
 .live-card:hover{
   border-color: var(--border-2);
-  box-shadow: 0 30px 80px -40px rgba(214,255,61,0.15);
+  box-shadow: 0 30px 80px -40px rgba(91,107,255,0.2);
 }
 
 .live-body{ padding: 24px; }
@@ -417,7 +421,7 @@ main{
 .skel-w2{ width: 35%; }
 @keyframes skel{ 0%,100%{opacity:1;} 50%{opacity:0.5;} }
 
-.dc-user{ display: flex; gap: 16px; align-items: center; }
+.dc-user{ display: flex; gap: 16px; align-items: flex-start; }
 .dc-avatar-wrap{ position: relative; flex-shrink: 0; }
 .dc-avatar{
   width: 56px; height: 56px;
@@ -469,6 +473,88 @@ main{
   display: flex; align-items: center; gap: 6px;
 }
 .dc-custom img{ width: 14px; height: 14px; }
+
+/* badges */
+.dc-badges{
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.dc-badge{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 3px 8px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  line-height: 1;
+  height: 20px;
+  transition: transform .2s, filter .2s;
+}
+.dc-badge:hover{
+  transform: translateY(-2px);
+  filter: brightness(1.15);
+}
+
+.dc-badge.b-code{
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: none;
+  color: var(--code-blue);
+  transition: transform .25s cubic-bezier(.2,.9,.3,1), filter .2s;
+}
+.dc-badge.b-code:hover{
+  transform: translateY(-2px) rotate(-6deg) scale(1.08);
+  filter: brightness(1.25);
+}
+.dc-badge.b-code svg{
+  display: block;
+  filter: drop-shadow(0 0 6px rgba(91,107,255,0.55));
+}
+
+.dc-badge.b-owner{
+  background: linear-gradient(135deg, #ffd93d, #ff9f0a);
+  color: #1a1200;
+  font-size: 11px;
+  padding: 3px 7px;
+  box-shadow: 0 0 12px rgba(255, 217, 61, 0.35);
+}
+.dc-badge.b-dev{
+  background: linear-gradient(135deg, #a970ff, #ff73fa);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(169, 112, 255, 0.25);
+}
+.dc-badge.b-js{
+  background: rgba(247, 223, 30, 0.15);
+  border-color: rgba(247, 223, 30, 0.4);
+  color: #f7df1e;
+}
+.dc-badge.b-cpp{
+  background: rgba(0, 89, 156, 0.2);
+  border-color: rgba(75, 139, 235, 0.4);
+  color: #7ba7e8;
+}
+.dc-badge.b-cs{
+  background: rgba(104, 33, 122, 0.2);
+  border-color: rgba(160, 100, 200, 0.4);
+  color: #c08fdb;
+}
+.dc-badge.b-skript{
+  background: rgba(214, 255, 61, 0.12);
+  border-color: rgba(214, 255, 61, 0.35);
+  color: var(--accent);
+}
 
 .dc-activity{
   margin-top: 20px;
@@ -554,6 +640,48 @@ main{
   flex-direction: column;
   gap: 14px;
 }
+
+/* verified badge */
+.bio-verified{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 8px;
+  background: linear-gradient(135deg, rgba(91, 107, 255, 0.12), rgba(91, 107, 255, 0.03));
+  border: 1px solid rgba(91, 107, 255, 0.32);
+  border-radius: 100px;
+  width: fit-content;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+.bv-check{
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: var(--code-blue);
+}
+.bv-check svg{
+  display: block;
+  filter: drop-shadow(0 0 8px rgba(91,107,255,0.55));
+}
+.bv-text{
+  color: var(--code-blue);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 10.5px;
+}
+.bv-sep{
+  color: var(--text-3);
+  opacity: 0.5;
+}
+.bv-sub{
+  color: var(--text-2);
+  font-size: 10.5px;
+}
+
 .bio-row{
   display: flex;
   gap: 26px;
