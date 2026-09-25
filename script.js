@@ -89,7 +89,7 @@
     });
   }
 
-  var HEX_BADGE = '<svg viewBox="0 0 120 120" width="14" height="14" aria-hidden="true">' +
+  var HEX_BADGE = '<svg viewBox="0 0 120 120" width="20" height="20" aria-hidden="true">' +
     '<path d="M32 10 L88 10 L118 60 L88 110 L32 110 L2 60 Z" fill="currentColor"/>' +
     '<path d="M40 42 L22 60 L40 78" stroke="#232428" stroke-width="9" fill="none" stroke-linejoin="round" stroke-linecap="round"/>' +
     '<path d="M80 42 L98 60 L80 78" stroke="#232428" stroke-width="9" fill="none" stroke-linejoin="round" stroke-linecap="round"/>' +
@@ -129,15 +129,12 @@
     var av = avatarUrl(user);
     var name = user.global_name || user.display_name || user.username || 'unknown';
     var handle = user.username || 'unknown';
-    var nitro = user.avatar && user.avatar.indexOf('a_') === 0 ? '<span class="dc-nitro">nitro</span>' : '';
 
     var html = '';
     html += '<div class="dc-card">';
 
-    // banner
     html += '  <div class="dc-banner"></div>';
 
-    // avatar
     html += '  <div class="dc-head">';
     html += '    <div class="dc-av-wrap">';
     html += '      <img class="dc-av" src="' + av + '" alt="" onerror="this.style.display=\'none\'">';
@@ -145,7 +142,6 @@
     html += '    </div>';
     html += '  </div>';
 
-    // name + tag
     html += '  <div class="dc-user-info">';
     html += '    <div class="dc-name-row">';
     html += '      <span class="dc-display">' + esc(name) + '</span>';
@@ -153,14 +149,12 @@
     html += '    </div>';
     html += '  </div>';
 
-    // badges
     html += '  <div class="dc-user-info">';
     html += '    <div class="dc-badges">';
     html += '      <span class="dc-badge-svg" title="Active Developer">' + HEX_BADGE + '</span>';
     html += '    </div>';
     html += '  </div>';
 
-    // custom status
     if(custom){
       var emoji = '';
       if(custom.emoji){
@@ -175,14 +169,12 @@
       html += '  </div>';
     }
 
-    // bio lines
     html += '  <div class="dc-bio">';
     html += '    <div class="dc-bio-line"><a href="https://nohello.net" target="_blank" rel="noopener">https://nohello.net/</a></div>';
     html += '    <div class="dc-bio-line">Don\'t DM For development issues</div>';
     html += '    <div class="dc-bio-line"><a href="https://discord.gg/qFXsGMWWZ" target="_blank" rel="noopener">https://discord.gg/qFXsGMWWZ…</a></div>';
     html += '  </div>';
 
-    // activity
     if(main){
       html += '  <div class="dc-activity">';
       html += '    <div class="dc-act-label">' + (activityTypeLabel[main.type] || 'activity') + '</div>';
@@ -225,7 +217,6 @@
       html += '  </div>';
     }
 
-    // bottom — verified pill + links + join button
     html += '  <div class="dc-bottom">';
     html += '    <div class="dc-verified-pill">';
     html += '      <span class="dc-vp-badge">' + HEX_BADGE + '</span>';
