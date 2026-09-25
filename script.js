@@ -158,9 +158,9 @@
   var CODE_BADGE_SVG =
     '<svg viewBox="0 0 120 120" width="12" height="12" aria-hidden="true">' +
       '<path d="M32 10 L88 10 L118 60 L88 110 L32 110 L2 60 Z" fill="currentColor"/>' +
-      '<path d="M40 42 L22 60 L40 78" stroke="#07070a" stroke-width="9" fill="none" stroke-linejoin="round" stroke-linecap="round"/>' +
-      '<path d="M80 42 L98 60 L80 78" stroke="#07070a" stroke-width="9" fill="none" stroke-linejoin="round" stroke-linecap="round"/>' +
-      '<path d="M68 32 L52 88" stroke="#07070a" stroke-width="9" fill="none" stroke-linecap="round"/>' +
+      '<path d="M40 42 L22 60 L40 78" stroke="#232428" stroke-width="9" fill="none" stroke-linejoin="round" stroke-linecap="round"/>' +
+      '<path d="M80 42 L98 60 L80 78" stroke="#232428" stroke-width="9" fill="none" stroke-linejoin="round" stroke-linecap="round"/>' +
+      '<path d="M68 32 L52 88" stroke="#232428" stroke-width="9" fill="none" stroke-linecap="round"/>' +
     '</svg>';
 
   function renderDiscord(data){
@@ -197,6 +197,7 @@
     var nitroBadge = user.avatar && user.avatar.startsWith('a_') ? '<span class="dc-nitro">nitro</span>' : '';
 
     var html = '';
+    html += '<div class="dc-banner"></div>';
     html += '<div class="dc-user">';
     html += '  <div class="dc-avatar-wrap">';
     html += '    <img class="dc-avatar" src="' + avUrl + '" alt="" onerror="this.style.display=\'none\'">';
@@ -208,10 +209,6 @@
     html += '    <div class="dc-badges">';
     html += '      <span class="dc-badge b-code" title="Developer">' + CODE_BADGE_SVG + '</span>';
     html += '      <span class="dc-badge b-owner" title="Owner">★</span>';
-    html += '      <span class="dc-badge b-js" title="JavaScript">JS</span>';
-    html += '      <span class="dc-badge b-cpp" title="C++">C++</span>';
-    html += '      <span class="dc-badge b-cs" title="C#">C#</span>';
-    html += '      <span class="dc-badge b-skript" title="Skript">SKRIPT</span>';
     html += '    </div>';
     if(customStatus){
       var emoji = '';
@@ -237,7 +234,7 @@
         imgUrl = activityAssetUrl(mainActivity.application_id, mainActivity.assets.large_image);
       }
       if(imgUrl){
-        html += '<img class="dc-act-img" src="' + imgUrl + '" alt="" onerror="this.style.background=\'#131320\';this.removeAttribute(\'src\')">';
+        html += '<img class="dc-act-img" src="' + imgUrl + '" alt="" onerror="this.style.background=\'#2b2d31\';this.removeAttribute(\'src\')">';
       } else {
         html += '<div class="dc-act-img"></div>';
       }
