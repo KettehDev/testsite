@@ -3,34 +3,127 @@
 
   var DISCORD_ID = "1484976113255190733";
 
-  /* ============ SCROLL REVEAL ============ */
+  /* ========== SPOTLIGHT FOLLOWS CURSOR ========== */
+  var spotlight = document.getElementById('spotlight');
+  if(spotlight){
+    var sx = 0, sy = 0, tx = 0, ty = 0;
+    document.addEventListener('mousemove', function(e){
+      tx = e.clientX;
+      ty = e.clientY;
+    });
+    (function loop(){
+      sx += (tx - sx) * 0.06;
+      sy += (ty - sy) * 0.06;
+      spotlight.style.left = sx + 'px';
+      spotlight.style.top = sy + 'px';
+      requestAnimationFrame(loop);
+    })();
+  }
+
+  /* ========== CLOCK ========== */
+  var clock = document.getElementById('clock');
+  function tick(){
+    var d = new Date();
+    var h = String(d.getHours()).padStart(2, '0');
+    var m = String(d.getMinutes()).padStart(2, '0');
+    var s = String(d.getSeconds()).padStart(2, '0');
+    if(clock) clock.textContent = h + ':' + m + ':' + s;
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* ========== LETTER SPLIT ANIMATION ========== */
+  var splitEls = document.querySelectorAll('[data-split]');
+  splitEls.forEach(function(el){
+    var text = el.textContent;
+    el.innerHTML = '';
+    for(var i = 0; i < text.length; i++){
+      var ch = text[i];
+      var span = document.createElement('span');
+      span.textContent = ch === ' ' ? '\u00A0' : ch;
+      span.style.display = 'inline-block';
+      span.style.opacity = '0';
+      span.style.transform = 'translateY(60%) rotate(6deg)';
+      span.style.transition = 'opacity .8s cubic-bezier(.2,.9,.3,1), transform .8s cubic-bezier(.2,.9,.3,1)';
+      span.style.transitionDelay = (i * 0.03) + 's';
+      el.appendChild(span);
+      (function(sp){
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){
+            sp.style.opacity = '1';
+            sp.style.transform = 'none';
+          });
+        });
+      })(span);
+    }
+  });
+
+  /* ========== SCROLL REVEAL ========== */
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
       if(entry.isIntersecting){
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'none';
+        entry.target.classList.add('in');
         io.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.08 });
 
-  document.querySelectorAll('.work-item, .contact-card, .meta-row, .about-text p, .hero-pill, .hero-heading, .hero-sub, .hero-actions, .live-card').forEach(function(el, i){
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(12px)';
-    el.style.transition = 'opacity .7s cubic-bezier(.2,.9,.3,1) ' + (i * 0.03) + 's, transform .7s cubic-bezier(.2,.9,.3,1) ' + (i * 0.03) + 's';
+  document.querySelectorAll('.live-card, .work, .about-text p, .about-spec, .contact-big, .contact-sm, .sec-head').forEach(function(el){
+    el.classList.add('reveal');
     io.observe(el);
   });
 
-  /* ============ DISCORD LIVE ============ */
-  var activityTypeLabel = {
-    0: 'playing',
-    1: 'streaming',
-    2: 'listening to',
-    3: 'watching',
-    4: 'custom',
-    5: 'competing in'
-  };
-  var statusMap = { online: 'online', idle: 'idle', dnd: 'dnd', offline: 'offline' };
+  /* ========== TOP NAV ACTIVE STATE ON SCROLL ========== */
+  var navLinks = document.querySelectorAll('#topMid a[data-scroll]');
+  var sections = ['work', 'about', 'contact'].map(function(id){ return document.getElementById(id); });
+  function updateNav(){
+    var mid = window.scrollY + window.innerHeight * 0.35;
+    var active = null;
+    sections.forEach(function(sec){
+      if(sec && sec.offsetTop <= mid) active = sec.id;
+    });
+    navLinks.forEach(function(a){
+      a.classList.toggle('active', a.getAttribute('href') === '#' + active);
+    });
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+
+  /* ========== SMOOTH SCROLL FOR data-scroll ========== */
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[data-scroll]');
+    if(!a) return;
+    var href = a.getAttribute('href');
+    if(href && href.startsWith('#')){
+      e.preventDefault();
+      var target = document.querySelector(href);
+      if(target){
+        var top = target.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    }
+  });
+
+  /* ========== WORK ITEM TILT ========== */
+  document.querySelectorAll('.work').forEach(function(item){
+    item.addEventListener('mousemove', function(e){
+      var r = item.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5;
+      var y = (e.clientY - r.top) / r.height - 0.5;
+      var title = item.querySelector('.w-title');
+      if(title){
+        title.style.transform = 'translate(' + (x * 8) + 'px, ' + (y * 4) + 'px)';
+      }
+    });
+    item.addEventListener('mouseleave', function(){
+      var title = item.querySelector('.w-title');
+      if(title) title.style.transform = '';
+    });
+  });
+
+  /* ========== DISCORD LIVE ========== */
+  var activityTypeLabel = { 0:'playing', 1:'streaming', 2:'listening to', 3:'watching', 4:'custom', 5:'competing in' };
+  var statusMap = { online:'online', idle:'idle', dnd:'dnd', offline:'offline' };
 
   function discordAvatarUrl(user){
     if(!user) return '';
@@ -66,7 +159,7 @@
     var content = document.getElementById('dcContent');
     if(!content) return;
     if(!data){
-      content.innerHTML = '<div class="dc-error">could not reach discord</div>';
+      content.innerHTML = '<div class="dc-error">could not reach discord api</div>';
       return;
     }
 
@@ -128,7 +221,7 @@
         imgUrl = activityAssetUrl(mainActivity.application_id, mainActivity.assets.large_image);
       }
       if(imgUrl){
-        html += '<img class="dc-act-img" src="' + imgUrl + '" alt="" onerror="this.style.background=\'#f4f4f5\';this.removeAttribute(\'src\')">';
+        html += '<img class="dc-act-img" src="' + imgUrl + '" alt="" onerror="this.style.background=\'#131320\';this.removeAttribute(\'src\')">';
       } else {
         html += '<div class="dc-act-img"></div>';
       }
@@ -192,7 +285,7 @@
   fetchDiscord();
   setInterval(fetchDiscord, 15000);
 
-  /* ============ MUSIC ============ */
+  /* ========== MUSIC ========== */
   (function(){
     var audio = document.getElementById('siteAudio');
     var btn = document.getElementById('musicBtn');
@@ -207,7 +300,7 @@
       }
     }, { once: true });
 
-    setTimeout(function(){ btn.classList.add('show'); }, 800);
+    setTimeout(function(){ btn.classList.add('show'); }, 900);
 
     btn.addEventListener('click', function(){
       if(audio.paused){
@@ -236,5 +329,32 @@
       if(e.code === 'Space'){ e.preventDefault(); btn.click(); }
     });
   })();
+
+  /* ========== KONAMI ========== */
+  var konami = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  var ki = 0;
+  document.addEventListener('keydown', function(e){
+    if(e.key === konami[ki]){
+      ki++;
+      if(ki === konami.length){
+        ki = 0;
+        document.documentElement.style.transition = 'filter .8s';
+        document.documentElement.style.filter = 'hue-rotate(180deg)';
+        setTimeout(function(){
+          document.documentElement.style.filter = 'hue-rotate(360deg)';
+          setTimeout(function(){ document.documentElement.style.filter = ''; }, 800);
+        }, 100);
+      }
+    } else { ki = 0; }
+  });
+
+  console.log(
+    '%c ketteh ',
+    'background:#d6ff3d; color:#07070a; font-weight:800; padding:4px 10px; border-radius:4px; letter-spacing:-0.02em;'
+  );
+  console.log(
+    '%c built by hand · actually no AI',
+    'color:#5a5a70; font-style:italic;'
+  );
 
 })();
